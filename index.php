@@ -372,11 +372,11 @@ function se($c){
     echo escHTML(@ob_get_clean());
 }
 @header("Content-Type: text/html; charset=".$_SESSION['CS']);?>
-    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"/><html> <head> <meta http-equiv="Content-Type" content="text/html; charset=
-<?php echo $_SESSION['CS'];?>
-"/> <title>
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"/><html> <head> <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['CS'];?>"/> <title>
         <?php echo escHTML($_SERVER['SERVER_NAME']);?>
-    </title> <style> html {
+    </title>
+    <style>
+        html {
             margin:0; padding:0; background-color:#4a4a4a
         }
         body {
@@ -559,14 +559,17 @@ function se($c){
         #listf td:nth-of-type(2):hover {
             color: #eee;
         }
-    </style> <script>
+    </style>
+    <script>
         function ca(v, f){
             var cb=document.getElementById(f);for(i=1, n=cb.elements.length; i<n; i++){
                 if(cb.elements[i].type=='checkbox') cb.elements[i].checked=v;
             }
-
         }
-    </script> </head><body> <fieldset class="head"><table class="head"> <tr><th style="width:125px">Server address :</th><td>
+    </script>
+</head>
+<body>
+<fieldset class="head"><table class="head"> <tr><th style="width:125px">Server address :</th><td>
                 <?php if(!empty($_SERVER['SERVER_NAME']))echo ($_SERVER['HTTP_HOST']==$_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:$_SERVER['HTTP_HOST'].' on '.$_SERVER['SERVER_NAME']; else echo $_SERVER['HTTP_HOST'];$i=@gethostbyname($_SERVER['HTTP_HOST']);if(!empty($_SERVER['SERVER_ADDR']))echo ' (', ($_SERVER['SERVER_ADDR']==$i)?$_SERVER['SERVER_ADDR']:$i.', '.$_SERVER['SERVER_ADDR'], ')'; elseif(!empty($i))echo ' (',$i,')';
                 echo ' / ', @php_uname('n');?>
             </td></tr><tr><th>Server OS :</th><td>
